@@ -3,12 +3,12 @@ var apis = {
         var data = req.body.recs;
         var size = req.body.size;
 
-        let vectors = new Array();
-        for (let i = 0; i < data.length; i++){
-            vectors[i] = [ data[i]['longitude_to'], data[i]['latitude_to']];
+        vectors = [];
+        for (i = 0; i < data.length; i++){
+            vectors[i] = [ data[i].longitude_to, data[i].latitude_to];
         }
 
-        const kmeans = require('node-kmeans');
+        kmeans = require('node-kmeans');
         kmeans.clusterize(vectors, {k: size}, (err,result) => {
             if(err)
                 return res.status(400).json({'status': 'Error'});
@@ -18,6 +18,6 @@ var apis = {
             }
         });
     },
-}
+};
 
 module.exports = apis;
